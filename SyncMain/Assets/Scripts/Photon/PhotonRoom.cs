@@ -22,7 +22,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
 
     //player info
     //From Photon.Realtime namespace
-    private Player[] photonPlayers;
+    private Photon.Realtime.Player[] photonPlayers;
     public int playersInRoom;
     public int myNumberInRoom;
 
@@ -55,7 +55,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void OnEnable()
+    public override void OnEnable()
     {
         base.OnEnable();
         PhotonNetwork.AddCallbackTarget(this);
@@ -112,7 +112,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
         }
 	}
 
-    /*
+    
     public override void OnJoinedRoom()
     {
 #if DEBUG1
@@ -143,8 +143,8 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
             StartGame();
         }
     }
-    */
 
+    /*
     public override void OnJoinedRoom()
     {
         menuPlayer.SetActive(false);
@@ -173,7 +173,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
             Destroy(localAvatar);
         }
     }
-
+    */
     //calls when another player joins the room
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -274,7 +274,37 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
     private void RPC_CreatePlayer()
     {
 
-        PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+        //PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs", "PhotonNetworkPlayer"), transform.position, Quaternion.identity, 0);
+        CreateAvatar();
+    }
 
+    private void CreateAvatar()
+    {
+        //menuPlayer.SetActive(false);
+        GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar"), transform.position, Quaternion.identity) as GameObject;
+        PhotonView photonView = localAvatar.GetComponent<PhotonView>();
+
+        if (PhotonNetwork.AllocateViewID(photonView))
+        {
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                CachingOption = EventCaching.AddToRoomCache,
+                Receivers = ReceiverGroup.Others
+            };
+
+            SendOptions sendOptions = new SendOptions
+            {
+                Reliability = true
+            };
+
+            PhotonNetwork.RaiseEvent(InstantiateVrAvatarEventCode, photonView.ViewID, raiseEventOptions, sendOptions);
+        }
+        else
+        {
+            Debug.LogError("Failed to allocate a ViewId.");
+
+            Destroy(localAvatar);
+        }
     }
 }
