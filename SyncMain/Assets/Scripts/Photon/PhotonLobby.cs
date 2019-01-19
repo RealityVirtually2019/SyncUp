@@ -11,8 +11,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 {
     //sets up our singleton
     public static PhotonLobby lobby;
+    
 
     public Text loginStatus;
+    public Text roomNum;
     public GameObject roomSearchButton;
     public GameObject cancelButtom;
 
@@ -64,9 +66,10 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     void CreateRoom()
     {
 
-        int randomRoomName = Random.Range(0, 10000);
+        int randomRoomName = Random.Range(0, 1);
         RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSetting.multiplayerSetting.maxPlayers };
         PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
+        roomNum.text = "Room" + randomRoomName;
 
 #if DEBUG1
         print("PhotonLobby:CreateRoom - Trying to create Room" + randomRoomName);

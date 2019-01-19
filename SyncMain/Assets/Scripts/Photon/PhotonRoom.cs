@@ -13,7 +13,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
 {
 
     public static PhotonRoom room;
-
+    public GameObject menuPlayer;
     //sends client message to another client through RPC calls
     private PhotonView PV;
 
@@ -147,6 +147,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
 
     public override void OnJoinedRoom()
     {
+        menuPlayer.SetActive(false);
         GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
         PhotonView photonView = localAvatar.GetComponent<PhotonView>();
 
