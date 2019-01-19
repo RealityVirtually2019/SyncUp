@@ -4408,6 +4408,23 @@ MonoBehaviour:
   mainPlayer: {fileID: 660293554}
   onColor: {r: 0.8745099, g: 0.19607845, b: 0.23529413, a: 0}
   material: {fileID: 2100000, guid: 7187cc644bb494bcaa94f7adb665bf19, type: 2}
+--- !u!1 &770005116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 168962, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1904833758}
+--- !u!114 &770005117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 770005116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8695d459d17478495fa4177181c930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerMask: 1
 --- !u!1 &782049811
 GameObject:
   m_ObjectHideFlags: 0
@@ -6241,6 +6258,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3f4d86dba2e4430b8f9ecd2b6db079, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  leftControllerHaptics: {fileID: 0}
+  rightControllerHaptics: {fileID: 0}
 --- !u!1 &1061671677
 GameObject:
   m_ObjectHideFlags: 0
@@ -13305,3 +13324,20 @@ Transform:
   m_Father: {fileID: 1451016974}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2139594844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 134650, guid: ce816f2e6abb0504092c23ed9b970dfd,
+    type: 2}
+  m_PrefabInternal: {fileID: 1904833758}
+--- !u!114 &2139594845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2139594844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8695d459d17478495fa4177181c930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerMask: 2
