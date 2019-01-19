@@ -5,12 +5,14 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PhotonLobby : MonoBehaviourPunCallbacks
 {
     //sets up our singleton
     public static PhotonLobby lobby;
 
+    public Text loginStatus;
     public GameObject roomSearchButton;
     public GameObject cancelButtom;
 
@@ -27,6 +29,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         //from Photon.pun namespace
         //Connects to Master photon Server.
         PhotonNetwork.ConnectUsingSettings();
+        loginStatus.text = "Offline";
     }
 
     //automatically called once we establish connection to photon server
@@ -35,6 +38,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 #if DEBUG1
         print("Player has connected to the Photon Master server");
 #endif
+        loginStatus.text = "Connected";
         roomSearchButton.SetActive(true);
         //When master client loads scene, all other clients connected will load scene
         PhotonNetwork.AutomaticallySyncScene = true;

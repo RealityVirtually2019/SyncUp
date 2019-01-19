@@ -1,5 +1,6 @@
 ﻿#define DEBUG1
 
+using ExitGames.Client.Photon;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections;
@@ -8,7 +9,8 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks{
+public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventCallback
+{
 
     public static PhotonRoom room;
 
@@ -32,6 +34,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks{
     private float lessThanMaxPlayers;
     private float atMaxPlayers;
     private float timeToStart;
+    public readonly byte InstantiateVrAvatarEventCode = 123;
 
     private void Awake()
     {
@@ -109,6 +112,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks{
         }
 	}
 
+    /*
     public override void OnJoinedRoom()
     {
 #if DEBUG1
@@ -139,7 +143,35 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks{
             StartGame();
         }
     }
+    */
 
+    public override void OnJoinedRoom()
+    {
+        GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
+        PhotonView photonView = localAvatar.GetComponent<PhotonView>();
+
+        if (PhotonNetwork.AllocateViewID(photonView))
+        {
+            RaiseEventOptions raiseEventOptions = new RaiseEventOptions
+            {
+                CachingOption = EventCaching.AddToRoomCache,
+                Receivers = ReceiverGroup.Others
+            };
+
+            SendOptions sendOptions = new SendOptions
+            {
+                Reliability = true
+            };
+
+            PhotonNetwork.RaiseEvent(InstantiateVrAvatarEventCode, photonView.ViewID, raiseEventOptions, sendOptions);
+        }
+        else
+        {
+            Debug.LogError("Failed to allocate a ViewId.");
+
+            Destroy(localAvatar);
+        }
+    }
 
     //calls when another player joins the room
     public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -212,6 +244,16 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks{
                 RPC_CreatePlayer();
 
             }
+        }
+    }
+
+    public void OnEvent(EventData photonEvent)
+    {
+        if (photonEvent.Code == InstantiateVrAvatarEventCode)
+        {
+            GameObject remoteAvatar = Instantiate(Resources.Load("RemoteAvatar")) as GameObject;
+            PhotonView photonView = remoteAvatar.GetComponent<PhotonView>();
+            photonView.ViewID = (int)photonEvent.CustomData;
         }
     }
 
