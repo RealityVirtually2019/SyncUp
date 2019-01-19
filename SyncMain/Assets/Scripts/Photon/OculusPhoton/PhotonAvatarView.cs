@@ -16,6 +16,7 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable {
 	// Use this for initialization
 	void Start () {
 
+
         photonView = GetComponent<PhotonView>();
 
         if(photonView.IsMine)
