@@ -20,6 +20,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         lobby = this;
     }
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +36,8 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
         print("Player has connected to the Photon Master server");
 #endif
         roomSearchButton.SetActive(true);
+        //When master client loads scene, all other clients connected will load scene
+        PhotonNetwork.AutomaticallySyncScene = true;
     }
 
     public void OnSearchButtonClicked()
@@ -58,7 +61,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     {
 
         int randomRoomName = Random.Range(0, 10000);
-        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = 2 };
+        RoomOptions roomOps = new RoomOptions() { IsVisible = true, IsOpen = true, MaxPlayers = (byte)MultiplayerSetting.multiplayerSetting.maxPlayers };
         PhotonNetwork.CreateRoom("Room" + randomRoomName, roomOps);
 
 #if DEBUG1
@@ -66,12 +69,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 #endif
     }
 
-    public override void OnJoinedRoom()
-    {
-#if DEBUG1
-        print("PhotonLobby:OnJoinedRoom - player joined a room");
-#endif
-    }
+
 
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
