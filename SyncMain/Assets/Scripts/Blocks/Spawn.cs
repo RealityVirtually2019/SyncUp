@@ -23,11 +23,12 @@ public class Spawn : MonoBehaviour {
         Debug.Log(offset.ToString());
 
         GameObject spawn = Instantiate(prefabs[prefabIndex], spawnLocation.position + offset, spawnLocation.rotation);
+        spawn.AddComponent<MoveBlock>();
         spawnedObjects.Add(spawn);
     }
 
     void Start () {
-        InvokeRepeating("RandomSpawn", 0.0f, 2f);
+        InvokeRepeating("RandomSpawn", 0.0f, 3f);
     }
 
     // Update is called once per frame
