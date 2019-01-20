@@ -7,7 +7,7 @@ using Photon.Pun;
 public class MoveToEnd : MonoBehaviour {
 
     [SerializeField] Transform moveSpot;
-    [SerializeField] float speed;
+    public float speed = 5f;
 
     private PhotonView PV;
     

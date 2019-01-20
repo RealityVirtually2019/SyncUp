@@ -150,8 +150,4 @@ public class PhotonAvatarView : MonoBehaviour, IPunObservable {
     }
 
 
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

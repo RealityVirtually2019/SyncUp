@@ -93,6 +93,14 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("hand"))
+        {
+            OnSearchButtonClicked();
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
