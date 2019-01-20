@@ -20,6 +20,7 @@ public class TrashHealth : MonoBehaviour {
     public void HitBlock(int numBlocks)
     {
         totalBlocks -= numBlocks;
+        print(gameObject.name + " health = " + totalBlocks);
         if (totalBlocks == 0)
             UpdateScore();
     }
