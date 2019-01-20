@@ -54,9 +54,15 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 #endif
         roomSearchButton.SetActive(false);
         cancelButtom.SetActive(true);
-        fader.FadeOut();
-        PhotonNetwork.JoinRandomRoom();
+        StartCoroutine(StartLogin(1.5f));
 
+    }
+
+    IEnumerator StartLogin(float time)
+    {
+        fader.FadeOut();
+        yield return new WaitForSeconds(time);
+        PhotonNetwork.JoinRandomRoom();
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)

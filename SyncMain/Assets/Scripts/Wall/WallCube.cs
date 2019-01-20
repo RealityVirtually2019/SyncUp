@@ -109,10 +109,12 @@ public class WallCube : MonoBehaviour {
             if (Activation == true)
             {
                 MakeBoom(other.transform);
+                other.GetComponent<ChildBlock>().HitActive();
 
             }
             else if (Activation == false)
             {
+                other.GetComponent<ChildBlock>().HitInactive();
                // GameObject boom = Instantiate(BadPrefab, other.transform.position, Quaternion.identity);
             }
             Destroy(other.gameObject);

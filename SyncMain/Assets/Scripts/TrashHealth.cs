@@ -18,6 +18,13 @@ public class TrashHealth : MonoBehaviour {
     public void HitBlock(int numBlocks)
     {
         totalBlocks -= numBlocks;
+        if (totalBlocks == 0)
+            UpdateScore();
+    }
+
+    public void HitInActive()
+    {
+        UpdateScore();
     }
 
     private bool CheckPassed()
@@ -34,6 +41,7 @@ public class TrashHealth : MonoBehaviour {
         else
         {
             ScoreManager.SM.LoseLife(1);
+            Destroy(gameObject);
         }
 
     }
