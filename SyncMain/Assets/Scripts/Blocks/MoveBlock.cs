@@ -4,6 +4,7 @@ using System.Collections;
 public class MoveBlock : MonoBehaviour
 {
     public float boundary = 5;
+    public float speed = 2f;
 
     // Use this for initialization
     void Start()
@@ -15,10 +16,11 @@ public class MoveBlock : MonoBehaviour
     void Update()
     {
         // Destroy object if it moves out of bounds
-        if (gameObject.transform.position.y >= boundary) {
-              Destroy(gameObject);
-        }
+       // if (gameObject.transform.position.y >= boundary) {
+       //       Destroy(gameObject);
+     //   }
         // Move the object forward along its z axis 1 unit/second.
-        transform.Translate(Vector3.forward * Time.deltaTime);
+        transform.Translate(-Vector3.forward * speed * Time.deltaTime);
     }
+
 }

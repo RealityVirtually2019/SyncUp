@@ -200,7 +200,8 @@ namespace Photon.Pun
                 return;
             }
 
-            Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
+            // Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(result);
+            Dictionary<string, string> values = null;
             if (values == null)
             {
                 this.Message = "Service temporarily unavailable. Please register through account website.";
