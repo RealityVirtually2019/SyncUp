@@ -14,7 +14,8 @@ public class LerpTarget : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
-        transform.position = Vector3.Lerp(transform.position, lerpTarget.position, lerpSpeed * Time.deltaTime);
+        transform.position = Vector3.Lerp(lerpTarget.position, transform.position, lerpSpeed * Time.deltaTime);
+        transform.rotation =  Quaternion.Lerp(lerpTarget.rotation, transform.rotation, lerpSpeed * Time.deltaTime);
 
 
 	}
