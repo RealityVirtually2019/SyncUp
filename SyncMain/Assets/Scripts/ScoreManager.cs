@@ -42,9 +42,15 @@ public class ScoreManager : MonoBehaviour {
 		
 	}
 
-    private void LoseLife(int lifeLoss)
+    public void LoseLife(int lifeLoss)
     {
         playerLife -= lifeLoss;
         textLife.text = playerLife.ToString();
+    }
+
+    public void AddScore(int score)
+    {
+        playerScore += score;
+        textScore.text = playerScore.ToString();
     }
 }
