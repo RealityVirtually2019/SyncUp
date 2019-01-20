@@ -17,6 +17,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
     public Text roomNum;
     public GameObject roomSearchButton;
     public GameObject cancelButtom;
+    public OVRScreenFade fader;
 
     private void Awake()
     {
@@ -53,6 +54,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 #endif
         roomSearchButton.SetActive(false);
         cancelButtom.SetActive(true);
+        fader.FadeOut();
         PhotonNetwork.JoinRandomRoom();
 
     }

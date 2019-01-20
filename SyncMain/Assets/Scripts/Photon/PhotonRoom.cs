@@ -122,6 +122,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
         photonPlayers = PhotonNetwork.PlayerList;
         myNumberInRoom = playersInRoom;
         PhotonNetwork.NickName = myNumberInRoom.ToString();
+        OnJoinedRoomAvatar();
         if (MultiplayerSetting.multiplayerSetting.delayStart)
         {
             print("Displayer players in room out of max players possible (" + playersInRoom + ":" + MultiplayerSetting.multiplayerSetting.maxPlayers + ")");
@@ -144,10 +145,10 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
         }
     }
 
-    /*
-    public override void OnJoinedRoom()
+    
+    public void OnJoinedRoomAvatar()
     {
-        menuPlayer.SetActive(false);
+        //menuPlayer.SetActive(false);
         GameObject localAvatar = Instantiate(Resources.Load("LocalAvatar")) as GameObject;
         PhotonView photonView = localAvatar.GetComponent<PhotonView>();
 
@@ -173,7 +174,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
             Destroy(localAvatar);
         }
     }
-    */
+    
     //calls when another player joins the room
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
@@ -266,7 +267,7 @@ public class PhotonRoom : MonoBehaviourPunCallbacks, IInRoomCallbacks, IOnEventC
         playerInGame++;
         if(playerInGame == PhotonNetwork.PlayerList.Length)
         {
-            PV.RPC("RPC_CreatePlayer", RpcTarget.All);
+            //PV.RPC("RPC_CreatePlayer", RpcTarget.All);
         }
     }
 

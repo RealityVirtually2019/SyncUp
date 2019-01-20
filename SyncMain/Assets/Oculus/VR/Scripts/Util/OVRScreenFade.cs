@@ -117,7 +117,7 @@ public class OVRScreenFade : MonoBehaviour
 		StartCoroutine(Fade(1,0));
 	}
 
-    /// <summary>
+     /// <summary>
     /// Automatically starts a fade in
     /// </summary>
     void Start()

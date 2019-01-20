@@ -14,8 +14,8 @@ public class WallCube : MonoBehaviour {
     public GameObject GoodPrefab;
     public GameObject BadPrefab;
 
-    private Transform leftHandObject;
-    private Transform rightHandObject;
+    public Transform leftHandObject;
+    public Transform rightHandObject;
     MeshRenderer cubeRenderer;
     public Renderer rend;
     public Material instanceMat;
@@ -90,9 +90,13 @@ public class WallCube : MonoBehaviour {
 
     private void SetUp()
     {
-        PlayerHead = GameObject.FindGameObjectWithTag("Player").transform;
-        leftHandObject = GameObject.FindGameObjectWithTag("Lhand").transform;
-        rightHandObject = GameObject.FindGameObjectWithTag("Rhand").transform;
+        // PlayerHead = GameObject.FindGameObjectWithTag("Player").transform;
+        // leftHandObject = GameObject.FindGameObjectWithTag("Lhand").transform;
+        // rightHandObject = GameObject.FindGameObjectWithTag("Rhand").transform;
+        PlayerHead = PlayerCtrl.PC.Head.transform;
+        leftHandObject = PlayerCtrl.PC.Lhand.transform;
+        rightHandObject = PlayerCtrl.PC.Rhand.transform;
+
         rend = GetComponent<Renderer>();
         instanceMat = rend.material;
         SetDone = true;

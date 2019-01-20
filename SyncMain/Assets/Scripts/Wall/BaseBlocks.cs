@@ -37,14 +37,14 @@ public class BaseBlocks : MonoBehaviour {
 
     private void OnEnable()
     {
-        Invoke("SetUp", .5f);
+        Invoke("SetUp", 1f);
     }
 
 
     void SetUp()
     {
-        leftControllerHaptics = GameObject.FindGameObjectWithTag("Lhand").GetComponent<OculusHapticsController>();
-        rightControllerHaptics = GameObject.FindGameObjectWithTag("Rhand").GetComponent<OculusHapticsController>();
+        leftControllerHaptics = PlayerCtrl.PC.Lhand.GetComponent<OculusHapticsController>();
+        rightControllerHaptics = PlayerCtrl.PC.Rhand.GetComponent<OculusHapticsController>();
 
         SetDone = true;
     }
