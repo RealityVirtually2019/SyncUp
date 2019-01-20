@@ -20,12 +20,21 @@ public class WallCube : MonoBehaviour {
     public Renderer rend;
     public Material instanceMat;
 
+    [SerializeField] GameObject ActiveBox;
     private bool SetDone = false;
+    private bool Activation = false;
+
+    private void Awake()
+    {
+        ActiveBox = GetComponentInChildren<ActiveScript>().gameObject;
+        ActiveBox.SetActive(false);
+    }
 
     private void Start()
     {
         SetDone = false;
     }
+
 
     private bool InCube(Vector3 avatarPos)
     {
@@ -40,7 +49,7 @@ public class WallCube : MonoBehaviour {
     // Use this for initialization
     void OnEnable() {
 
-        Invoke("SetUp", .5f);
+        Invoke("SetUp", 1f);
 
     }
 
@@ -54,7 +63,9 @@ public class WallCube : MonoBehaviour {
         {
             instanceMat.EnableKeyword("_EMISSION");
             instanceMat.SetColor("_EmissionColor", onColorHead);
-            gameObject.tag = "active";
+            //gameObject.tag = "active";
+            ActiveBox.SetActive(true);
+            Activation = true;
 
         }
         else if (InCube(leftHandObject.position) || InCube(rightHandObject.position))
@@ -62,13 +73,18 @@ public class WallCube : MonoBehaviour {
 
             instanceMat.EnableKeyword("_EMISSION");
             instanceMat.SetColor("_EmissionColor", onColorHands);
+            ActiveBox.SetActive(true);
+            Activation = true;
 
-            gameObject.tag = "active";
+            // gameObject.tag = "active";
         }
         else
         {
             instanceMat.DisableKeyword("_EMISSION");
-            gameObject.tag = "inactive";
+            ActiveBox.SetActive(false);
+            Activation = false;
+
+            //gameObject.tag = "inactive";
         }
     }
 
@@ -86,12 +102,12 @@ public class WallCube : MonoBehaviour {
     {
         if(other.CompareTag("BadBox"))
         {
-            if (gameObject.tag == "active")
+            if (Activation == true)
             {
                 MakeBoom(other.transform);
 
             }
-            else if (gameObject.tag == "inactive")
+            else if (Activation == false)
             {
                // GameObject boom = Instantiate(BadPrefab, other.transform.position, Quaternion.identity);
             }
