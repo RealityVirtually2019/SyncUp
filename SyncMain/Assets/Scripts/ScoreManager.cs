@@ -26,10 +26,15 @@ public class ScoreManager : MonoBehaviour {
     [SerializeField] Text textLife;
     [SerializeField] int playerScore;
     [SerializeField] int playerLife;
+    public AudioClip audiGood;
+    public AudioClip audiBad;
+
+    private AudioSource audiS;
 
     private void Awake()
     {
         SM = this;
+        audiS = GetComponent<AudioSource>();
     }
 
     // Use this for initialization
@@ -52,5 +57,15 @@ public class ScoreManager : MonoBehaviour {
     {
         playerScore += score;
         textScore.text = playerScore.ToString();
+    }
+
+    public void playGood()
+    {
+        audiS.PlayOneShot(audiGood);
+    }
+
+    public void playBad()
+    {
+        audiS.PlayOneShot(audiBad);
     }
 }

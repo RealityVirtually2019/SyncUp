@@ -8,6 +8,7 @@ public class TrashHealth : MonoBehaviour {
     void Awake () {
         ChildBlock[] children = GetComponentsInChildren<ChildBlock>();
         totalBlocks = children.Length;
+
     }
 	
 	// Update is called once per frame
@@ -37,10 +38,12 @@ public class TrashHealth : MonoBehaviour {
         if (CheckPassed())
         {
             ScoreManager.SM.AddScore(1);
+            ScoreManager.SM.playGood();
         }
         else
         {
             ScoreManager.SM.LoseLife(1);
+            ScoreManager.SM.playBad();
             Destroy(gameObject);
         }
 
