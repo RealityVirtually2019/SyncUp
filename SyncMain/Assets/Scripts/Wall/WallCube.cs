@@ -108,7 +108,7 @@ public class WallCube : MonoBehaviour {
         {
             if (Activation == true)
             {
-                MakeBoom(other.transform);
+                //MakeBoom(other.transform);
                 other.GetComponent<ChildBlock>().HitActive();
 
             }

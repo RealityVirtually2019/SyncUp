@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TrashHealth : MonoBehaviour {
+    public GameObject boomPrefab;
     private int totalBlocks;
 
     void Awake () {
@@ -39,6 +40,7 @@ public class TrashHealth : MonoBehaviour {
         {
             ScoreManager.SM.AddScore(1);
             ScoreManager.SM.playGood();
+            GameObject boomx = Instantiate(boomPrefab, transform.position, Quaternion.identity);
         }
         else
         {
@@ -48,4 +50,6 @@ public class TrashHealth : MonoBehaviour {
         }
 
     }
+
+   
 }

@@ -29,6 +29,7 @@ public class ScoreManager : MonoBehaviour {
     public AudioClip audiGood;
     public AudioClip audiBad;
 
+
     private AudioSource audiS;
 
     private void Awake()
@@ -68,4 +69,5 @@ public class ScoreManager : MonoBehaviour {
     {
         audiS.PlayOneShot(audiBad);
     }
+
 }
