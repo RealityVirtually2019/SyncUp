@@ -21,7 +21,7 @@ public class SceneSwuitch : MonoBehaviour {
     {
         if(other.CompareTag("hand"))
         {
-            StartCoroutine(StartLogin(1.5f));
+            StartCoroutine(StartLogin(2.5f));
         }
     }
 

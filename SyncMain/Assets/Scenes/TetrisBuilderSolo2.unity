@@ -5103,6 +5103,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 1707888227042068, guid: 72e5deb18c01b0b41a0f28bec39d24e6, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72e5deb18c01b0b41a0f28bec39d24e6, type: 2}
   m_IsPrefabAsset: 0
@@ -17211,7 +17215,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4154009821533426, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 1.92
+      value: 1.43
       objectReference: {fileID: 0}
     - target: {fileID: 4620166425952262, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
       propertyPath: m_RootOrder
@@ -17268,6 +17272,26 @@ Prefab:
     - target: {fileID: 4216377720849118, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154009821533426, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154009821533426, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154009821533426, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154009821533426, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154009821533426, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.561
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c1c43798d7ca9f46a2efaa70e0302d8, type: 2}

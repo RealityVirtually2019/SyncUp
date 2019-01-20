@@ -54,7 +54,7 @@ public class PhotonLobby : MonoBehaviourPunCallbacks
 #endif
         roomSearchButton.SetActive(false);
         cancelButtom.SetActive(true);
-        StartCoroutine(StartLogin(1.5f));
+        StartCoroutine(StartLogin(2f));
 
     }
 
