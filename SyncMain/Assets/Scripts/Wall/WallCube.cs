@@ -3,10 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WallCube : MonoBehaviour {
-    public OVRPlayerController mainPlayer;
+
+    private Transform PlayerHead;
     // Visual indication that cube is "on"
     public Color onColor;
-    public Material material;
+    public Color offColor;
+
+    private Transform leftHandObject;
+    private Transform rightHandObject;
+    MeshRenderer cubeRenderer;
+    public Renderer rend;
+    public Material instanceMat;
+
+
+
+
+
 
     private bool InCube(Vector3 avatarPos)
     {
@@ -19,30 +31,29 @@ public class WallCube : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start() {
+    void Awake() {
+        PlayerHead = GameObject.FindGameObjectWithTag("Player").transform;
+        leftHandObject = GameObject.FindGameObjectWithTag("Lhand").transform;
+        rightHandObject = GameObject.FindGameObjectWithTag("Rhand").transform;
+        rend = GetComponent<Renderer>();
+        instanceMat = rend.material;
+        onColor.a = .9f;
+        offColor.a = .2f;
 
     }
 
     // Update is called once per frame
     void Update() {
-        Vector3 headPos = mainPlayer.transform.position;
-        //Vector3 leftHandPos = mainPlayer.transform.Find("TrackingSpace").transform.TransformPoint(OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTrackedRemote));
-        //Vector3 rightHandPos = mainPlayer.transform.Find("TrackingSpace").transform.TransformPoint(OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTrackedRemote));
-        
-        MeshRenderer cubeRenderer = gameObject.GetComponent<MeshRenderer>();
 
-        // Change color
-        if (InCube(headPos))
-        //if ((InCube(headPos) || InCube(leftHandPos)) || InCube(rightHandPos))
+        if ((InCube(PlayerHead.position)|| InCube(leftHandObject.position) )|| InCube(rightHandObject.position))
         {
-            Material onMaterial = new Material(material){ color = onColor };
-            cubeRenderer.material = onMaterial;
+
+            instanceMat.EnableKeyword("_EMISSION");
             gameObject.tag = "active";
         }
         else
         {
-            Material offMaterial = new Material(material) { color = material.color };
-            cubeRenderer.material = offMaterial;
+            instanceMat.DisableKeyword("_EMISSION");
             gameObject.tag = "inactive";
         }
     }

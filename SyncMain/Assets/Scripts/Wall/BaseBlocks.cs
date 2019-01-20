@@ -7,8 +7,8 @@ using System;
 public class BaseBlocks : MonoBehaviour {
     readonly List<GameObject> activeCubes = new List<GameObject>();
     readonly string activeTag = "active";
-    [SerializeField] OculusHapticsController leftControllerHaptics;
-    [SerializeField] OculusHapticsController rightControllerHaptics;
+    OculusHapticsController leftControllerHaptics;
+    OculusHapticsController rightControllerHaptics;
 
     private bool CheckAdjacent(Transform object1, Transform object2, double precision = 1e-4)
     {
@@ -33,13 +33,20 @@ public class BaseBlocks : MonoBehaviour {
     void Start () {
 
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    private void OnEnable()
+    {
+        leftControllerHaptics = GameObject.FindGameObjectWithTag("Lhand").GetComponent<OculusHapticsController>();
+        rightControllerHaptics = GameObject.FindGameObjectWithTag("Rhand").GetComponent<OculusHapticsController>();
+    }
+
+    // Update is called once per frame
+    void Update () {
         Transform[] arrayOfChildren = gameObject.transform.Cast<Transform>().Where(c => c.gameObject.tag == "active").ToArray();
         bool foundBlock = CheckBlock(arrayOfChildren);
         if (foundBlock)
         {
+            print("found block");
             leftControllerHaptics.Vibrate(VibrationForce.Medium);
             rightControllerHaptics.Vibrate(VibrationForce.Medium);
         }
