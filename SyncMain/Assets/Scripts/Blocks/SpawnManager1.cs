@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PhotonView))]
 public class SpawnManager1 : MonoBehaviour {
@@ -9,12 +10,22 @@ public class SpawnManager1 : MonoBehaviour {
     public GameObject[] prefabs;
     public List<GameObject> spawnedObjects;
     public float spawnDelay = 4f;
+    public Text levelText;
+
     private int spawnIndex = 0;
     private PhotonView PV;
+    private int spawnCount = 0;
+    private int level = 1;
+    private float blockMoveSpeed = 2f;
 
     private void Awake()
     {
         PV = GetComponent<PhotonView>();
+    }
+
+    private void OnEnable()
+    {
+        spawnCount = 0;
     }
 
     private void RandomSpawn()
@@ -22,6 +33,15 @@ public class SpawnManager1 : MonoBehaviour {
         // choose prefab to spawn
         int prefabIndex = Random.Range(0, prefabs.Length);        
         GameObject spawn = Instantiate(prefabs[prefabIndex], RandSpot(spawnLocations), Quaternion.identity);
+        spawnCount++;
+        if ((spawnCount % 7) == 0)
+        {
+            blockMoveSpeed += .5f;
+            level++;
+            levelText.text = "Level: " + (level); 
+        }
+        spawn.GetComponent<MoveBlock>().speed = blockMoveSpeed;
+
         spawnedObjects.Add(spawn);
     }
 

@@ -42,6 +42,7 @@ public class TrashHealth : MonoBehaviour {
             ScoreManager.SM.AddScore(1);
             ScoreManager.SM.playGood();
             GameObject boomx = Instantiate(boomPrefab, transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
         else
         {
